@@ -21,12 +21,13 @@ p = zeros(size(X, 1), 1);
 %       can use max(A, [], 2) to obtain the max for each row.
 %
 
-
-
-
-
-
-
+a1 = [ones(m, 1), X];
+% Theta1的大小为25*401，Theta2的大小为10*26
+z2 = Theta1 * a1'; % 结果：25*m
+a2 = [ones(1, m); sigmoid(z2)]; % 结果26*m
+z3 = Theta2 * a2; % 结果：10*m
+a3 = sigmoid(z3);
+[val, p] = max(a3', [], 2);
 
 
 % =========================================================================

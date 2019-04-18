@@ -42,10 +42,12 @@ hx = sigmoid(X*theta);
 grad = (X' * (hx - y) / m); % 未正规化的梯度
 temp = theta;
 temp(1) = 0;
-grad = grad + (lambda / m * temp); % 正规化的梯度
+% 正规化的梯度，注意两点：
+% 1. 正规化所加的是对应的theta，而非所有theta
+% 2. 第一个梯度不需要正规化处理
+grad = grad + (lambda / m * temp); 
 
-% 求代价函数
-% 注意
+% 求代价函数，注意：正规化的项不包括第一个theta值
 J = -(y' * log(hx) + (1-y)' * log(1-hx)) / m + lambda / (2 * m) * temp' * temp;
 % =============================================================
 

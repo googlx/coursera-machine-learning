@@ -29,13 +29,13 @@ X = [ones(m, 1) X];
 %       are in rows, then, you can use max(A, [], 2) to obtain the max 
 %       for each row.
 %       
-
-
-
-
-
-
-
+pred = zeros(1, num_labels); % 存储同一组案例与各组theta值的sigmoid运算结果
+for a = 1:m,
+	for b = 1:num_labels,
+		pred(b) = all_theta(b, :) * X(a, :)'; % 从all_theta和X中分别提取对应行，并进行向量运算
+	end;
+	[val, p(a)] = max(pred, [], 2); % 返回的第2个值才是号码，注意方括号语法
+end;
 % =========================================================================
 
 

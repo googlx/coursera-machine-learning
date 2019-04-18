@@ -48,18 +48,14 @@ X = [ones(m, 1) X];
 %         fmincg (@(t)(lrCostFunction(t, X, (y == c), lambda)), ...
 %                 initial_theta, options);
 %
-
-
-
-
-
-
-
-
-
-
-
-
+initial_theta = zeros(n + 1, 1);
+options = optimset('GradObj', 'on', 'MaxIter', 50);
+for c = 1:num_labels,
+	initial_theta = ... % 三点为承接符号
+	    fmincg(@(t)(lrCostFunction(t, X, (y == c), lambda)), ...
+	    initial_theta, options);
+        all_theta(c, :) = initial_theta'; % 将对应的行替换为计算出来的theta值
+end; % 注意for的格式：for ..., ... end;
 % =========================================================================
 
 

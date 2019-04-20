@@ -18,14 +18,10 @@ W = zeros(L_out, 1 + L_in);
 %
 % Note: The first column of W corresponds to the parameters for the bias unit
 %
-
-
-
-
-
-
-
-
+% 随机初始化Theta权重
+epsilon_init = 0.12;
+W(:, 1) = ones(L_out, 1);
+W(:, 2:end) = rand(L_out, L_in) * (2 * epsilon_init) - epsilon_init;
 
 % =========================================================================
 

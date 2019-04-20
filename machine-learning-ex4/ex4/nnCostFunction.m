@@ -62,7 +62,35 @@ Theta2_grad = zeros(size(Theta2));
 %               and Theta2_grad from Part 2.
 %
 
+% 第一部分：求代价函数
+%     参数：1. 将y转化为0/1矩阵；2. 利用前匮算法计算h值
+%     前匮算法涉及多步矩阵运算，最好预先画出矩阵及其运算步骤，而后再编程
+A1 = [ones(m, 1) X]';
+Z2 = Theta1 * A1;
+A2 = [ones(1, m); sigmoid(Z2)];
+Z3 = Theta2 * A2;
+H = sigmoid(Z3)';
+Y = zeros(m, num_labels);
+for a=1:m,
+	Y(a, y(a)) = 1;
+end;
+J = -(1/m) * sum(sum((Y.*log(H)+(1-Y).*log(1-H))));
 
+T1 = Theta1(:, 2:end); 
+T2 = Theta2(:, 2:end); % 去除第一个Theta值
+eye1 = eye(size(T1, 1));
+eye2 = eye(size(T2, 1)); % 辅助计算对角线元素
+reg = lambda / (2*m) * (sum(sum((T1*T1' .* eye1))) + sum(sum(T2*T2' .* eye2))); % 正规化代价函数，注意只累加对角线上的元素
+J += reg;
+
+% 第二部分：实现反向传播算法，计算Theta的梯度
+%     参数：1. H矩阵，Y矩阵；2. Theta矩阵和A矩阵
+Delta3 = H - Y;
+Delta2 = T
+for a=1:m,
+	Delta1 = 
+
+% 第三部分：正则化代价函数和梯度
 % -------------------------------------------------------------
 
 % =========================================================================
